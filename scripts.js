@@ -1,36 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Simple Page</title>
-  <style>
-    body {
-      margin: 0;
-      background-color: black;
-      font-family: Arial, sans-serif;
-      color: white;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-      text-align: center;
+document.addEventListener("DOMContentLoaded", function() {
+    var audio = document.getElementById('backgroundAudio');
+    var introScreen = document.getElementById('introScreen');
+    var backgroundVideo = document.getElementById('backgroundVideo');
+    var profileCard = document.getElementById('profileCard');
+  
+    // Typing effect function
+    function typeText(text, elementId, callback) {
+      let i = 0;
+      document.getElementById(elementId).style.animation = 'typing 3s steps(30, end), blink-caret .5s step-end infinite';
+      const interval = setInterval(() => {
+        document.getElementById(elementId).textContent += text[i];
+        i++;
+        if (i === text.length) {
+          clearInterval(interval);
+          callback();
+        }
+      }, 100); // Speed of typing effect (100ms per character)
     }
-  </style>
-</head>
-<body>
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      var audio = document.getElementById('backgroundAudio');
-      var backgroundVideo = document.getElementById('backgroundVideo');
-      var profileCard = document.getElementById('profileCard');
-      
-      // Test button function
-      window.testFunction = function() {
-        alert('Test button clicked!');
-      };
-    });
-  </script>
-</body>
-</html>
+  
+    // Show the profile card when clicking the screen
+    document.getElementById('introScreen').onclick = function() {
+      introScreen.style.opacity = 0; // Start fade out transition
+      setTimeout(function() {
+        audio.play();
+        introScreen.style.visibility = 'hidden'; // Hide the intro screen after fading out
+        backgroundVideo.classList.remove('hidden');
+        profileCard.classList.remove('hidden');
+      }, 500); // Shorten the transition duration to 500ms
+    };
+  
+    // Start the typing effect when the page loads
+    window.onload = function() {
+      typeText('Click to Enter', 'clickText', function() {
+        // Once the text is fully typed, the screen becomes clickable
+        introScreen.style.pointerEvents = 'auto';
+      });
+    };
+  
+    // Test button function
+    window.testFunction = function() {
+      alert('Test button clicked!');
+    };
+});
