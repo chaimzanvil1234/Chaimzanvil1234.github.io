@@ -18,19 +18,5 @@ document.addEventListener("DOMContentLoaded", function() {
       }, 100); // Speed of typing effect (100ms per character)
     }
   
-    // Show the profile card when clicking the screen
-    document.getElementById('introScreen').onclick = function() {
-      introScreen.style.opacity = 0; // Start fade out transition
-      setTimeout(function() {
-        audio.play();
-        introScreen.style.visibility = 'hidden'; // Hide the intro screen after fading out
-        backgroundVideo.classList.remove('hidden');
-        profileCard.classList.remove('hidden');
-      }, 500); // Shorten the transition duration to 500ms
-    };
-
-    // Test button function
-    window.testFunction = function() {
-      alert('Test button clicked!');
     };
 });
