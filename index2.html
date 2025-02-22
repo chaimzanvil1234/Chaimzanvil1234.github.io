@@ -17,6 +17,15 @@
       overflow: hidden;
       text-align: center;
     }
+    .click-to-enter {
+      font-size: 30px;
+      cursor: pointer;
+      padding: 20px 40px;
+      background: none;
+      border: none;
+      color: white;
+      font-weight: bold;
+    }
     .login-panel {
       display: none;
       background: linear-gradient(to right, #7a2b8f, #9c5baf);
@@ -48,6 +57,7 @@
 <body>
   <div id="container">
     <div id="text-container">
+      <div class="click-to-enter" id="clickText"></div>
     </div>
     <div class="login-panel">
       <h2>Login</h2>
@@ -74,11 +84,22 @@
       }, 100); // Speed of typing effect (100ms per character)
     }
 
+    // Show the login panel when clicking the screen
+    document.getElementById('container').onclick = function() {
+      document.getElementById('container').style.pointerEvents = 'none'; // Disable further clicks
+      showLoginPanel();
+    };
+
     // Function to show the login panel
     function showLoginPanel() {
       document.querySelector('.login-panel').style.display = 'block';
     }
 
+    // Start the typing effect when the page loads
+    window.onload = function() {
+      typeText('Click to Enter', 'clickText', function() {
+        // Once the text is fully typed, the screen becomes clickable
+        document.getElementById('container').style.pointerEvents = 'auto';
       });
     };
   </script>
