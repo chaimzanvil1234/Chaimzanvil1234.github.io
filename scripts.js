@@ -28,15 +28,7 @@ document.addEventListener("DOMContentLoaded", function() {
         profileCard.classList.remove('hidden');
       }, 500); // Shorten the transition duration to 500ms
     };
-  
-    // Start the typing effect when the page loads
-    window.onload = function() {
-      typeText('Click to Enter', 'clickText', function() {
-        // Once the text is fully typed, the screen becomes clickable
-        introScreen.style.pointerEvents = 'auto';
-      });
-    };
-  
+
     // Test button function
     window.testFunction = function() {
       alert('Test button clicked!');
